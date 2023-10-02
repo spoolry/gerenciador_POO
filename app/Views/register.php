@@ -1,9 +1,13 @@
-<?php if( session('errors')): ?>
+<?php if (session('errors')) : ?>
     <div class="alert alert-danger"><?= implode('<br>',  session('errors')) ?></div>
-<?php endif;?>
+<?php endif; ?>
 
 <form method="POST" action="/createUser">
-    <input type="email" name="email" id="email" />
-    <input type="password" name="password" id="password" />
+    <label for="text">Nome:</label>
+    <input type="text" name="nome" id="nome" require />
+    <label for="text">Email:</label>
+    <input type="email" name="email" id="email" require/>
+    <label for="text">Senha:</label>
+    <input type="password" name="password" id="password" require/>
     <button type="submit">Criar usuário</button>
 </form>

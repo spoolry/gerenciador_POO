@@ -15,11 +15,11 @@ class UserService{
         $this->userModel = Factories::models(UserModel::class);
     }
 
-    public function authenticate($email, $senha){
+    public function authenticate($name, $email, $password){
 
         $user = $this->userModel->getUser($email);
        
-        if($user && password_verify($senha, $user->password)){
+        if($user && password_verify($password, $user->password)){
            
             $variavalDeSessao = [
                 'email' => $user->email,
@@ -38,12 +38,13 @@ class UserService{
         }
     }
 
-    public function createUser($email, $password){
+    public function createUser($userArray){
 
         $user = new User();
        
-        $user->email = $email;
-        $user->password = $password;
+        $user->name = $userArray['nome'];
+        $user->email = $userArray['email'];
+        $user->password = $userArray['password'];
     
         if($this->userModel->save($user)){
             session()->setFlashdata('success', lang('App.successCreateLogin'));

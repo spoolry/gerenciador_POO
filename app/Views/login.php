@@ -8,12 +8,13 @@
 
 
 <form action="/authenticate" method="post">
-    <div class="form-group">
-        <label>Username</label>
+<div class="form-group">
+        <div class="form-group">
+        <label>Email</label>
         <input type="text" name="email" class="form-control" required>
     </div>
     <div class="form-group">
-        <label>Password</label>
+        <label>Senha</label>
         <input type="password" name="senha" class="form-control" required>
     </div>
     <button type="submit" class="btn btn-primary">Login</button>

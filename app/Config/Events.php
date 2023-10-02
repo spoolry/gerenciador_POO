@@ -5,6 +5,7 @@ namespace Config;
 use CodeIgniter\Events\Events;
 use CodeIgniter\Exceptions\FrameworkException;
 use CodeIgniter\HotReloader\HotReloader;
+use CodeIgniter\Model;
 
 /*
  * --------------------------------------------------------------------
@@ -53,3 +54,4 @@ Events::on('pre_system', static function () {
         }
     }
 });
+

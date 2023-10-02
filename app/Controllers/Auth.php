@@ -27,20 +27,27 @@ class Auth extends BaseController
         echo view('register');
     }
 
-    public function authenticate(){
-       
+    public function authenticate()
+    {
+
+        $name = $this->request->getPost('nome');
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
-        
-        return ($this->userService->authenticate($email, $senha)) ? redirect()->to('/dashboard') : redirect()->back();
 
+        return ($this->userService->authenticate($name, $email, $senha)) ? redirect()->to('/dashboard') : redirect()->back();
     }
 
-    public function createUser(){
-        // falta fazer a atualizacao desse metodo
+    public function createUser()
+    {
+        if ($this->userService->createUser($this->request->getPost())) {
+            return redirect()->to('/');
+        } else {
+            return redirect()->back()->withInput()->with('errors', $this->userService->errors());
+        }
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->destroy();
         return redirect()->to('/');
     }
