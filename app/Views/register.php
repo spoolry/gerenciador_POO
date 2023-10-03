@@ -1,6 +1,9 @@
 <?php if (session('errors')) : ?>
     <div class="alert alert-danger"><?= implode('<br>',  session('errors')) ?></div>
 <?php endif; ?>
+<?php if(session()->getFlashdata('success')): ?>
+    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+<?php endif;?>
 
 <form method="POST" action="/createUser">
     <label for="text">Nome:</label>
