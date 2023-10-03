@@ -55,4 +55,10 @@ class UserService{
 
     }
 
+    
+    public function updateUser($id)
+    {
+        
+    }
+
 }

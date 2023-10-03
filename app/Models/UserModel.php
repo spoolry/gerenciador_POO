@@ -27,6 +27,11 @@ class UserModel extends Model
         $data['data']['created_at'] = date('Y-m-d H:i:s');
     return $data;
     }
+    protected $beforeUpdate   = ['setUpdatedAt'];
+    protected function setUpdatedAt(array $data){
+        $data['data']['updated_at'] = date('Y-m-d H:i:s');
+    return $data;
+    }
 
     protected $validationRules = [
         'name' => 'required|min_length[3]|',
@@ -38,4 +43,5 @@ class UserModel extends Model
     {
         return $this->where('email', $email)->first();
     }
+
 }
