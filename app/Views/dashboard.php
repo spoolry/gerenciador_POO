@@ -16,5 +16,5 @@
     echo lang('App.welcome', [], session('user_locale'));
 ?>
 
-<a href="/language/en/">English</a> | <a href="/language/pt-BR/">Português</a>
+<a href="/language/en/">English</a> | <a href="/language/pt-BR/">Português</a> | <a href=""></a>
 

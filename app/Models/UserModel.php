@@ -23,9 +23,10 @@ class UserModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
     protected $beforeInsert   = ['setCreatedAt'];
-    protected function setCreatedAt(array $data){
+    protected function setCreatedAt(array $data)
+    {
         $data['data']['created_at'] = date('Y-m-d H:i:s');
-    return $data;
+        return $data;
     }
 
     protected $validationRules = [
@@ -38,4 +39,5 @@ class UserModel extends Model
     {
         return $this->where('email', $email)->first();
     }
+
 }
