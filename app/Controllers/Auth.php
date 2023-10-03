@@ -29,7 +29,7 @@ class Auth extends BaseController
 
     public function authenticate()
     {
-
+        
         $name = $this->request->getPost('nome');
         $email = $this->request->getPost('email');
         $senha = $this->request->getPost('senha');
@@ -40,15 +40,27 @@ class Auth extends BaseController
     public function createUser()
     {
         if ($this->userService->createUser($this->request->getPost())) {
-            return redirect()->to('/');
-        } else {
-            return redirect()->back()->withInput()->with('errors', $this->userService->errors());
-        }
-    }
 
+            return redirect('/');
+            session()->setFlashdata('success', 'Usuário cadastrado com sucesso.');
+
+        } else {
+
+            return redirect()->back()->withInput()->with('errors', $this->userService->errors());
+
+        }
+        
+    }
     public function logout()
     {
         session()->destroy();
         return redirect()->to('/');
+    }
+
+    public function deleteUser()
+    {
+        $id = session('id');
+        
+        $this->userService->selfDelete($id);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Entities\User;
 use App\Models\UserModel;
 use CodeIgniter\Config\Factories;
+use CodeIgniter\Validation\Validation;
+use Config\Validation as ConfigValidation;
 
 class UserService{
 
@@ -22,6 +24,7 @@ class UserService{
         if($user && password_verify($password, $user->password)){
            
             $variavalDeSessao = [
+                'id' => $user->id,
                 'email' => $user->email,
                 'data_login' => bd2br(date('Y-m-d')),
                 'data_cad' => $user->created_at,
@@ -45,9 +48,10 @@ class UserService{
         $user->name = $userArray['nome'];
         $user->email = $userArray['email'];
         $user->password = $userArray['password'];
+
     
         if($this->userModel->save($user)){
-            session()->setFlashdata('success', lang('App.successCreateLogin'));
+            session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
             return redirect()->to('/');
         }else{
             return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
@@ -55,10 +59,13 @@ class UserService{
 
     }
 
-    
-    public function updateUser($id)
-    {
-        
+
+    public function selfDelete($id){
+        if($this->userModel->delete($id)){
+            return redirect()->to('/');
+        }else{
+            return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
+        }
     }
 
 }
