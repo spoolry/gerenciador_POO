@@ -12,6 +12,7 @@ $routes->get('logout', 'Auth::logout');
 $routes->get('create', 'Auth::create');
 $routes->get('register', 'Auth::register');
 $routes->post('createUser', 'Auth::createUser');
+$routes->match(['get', 'post'], 'updateUser', 'Auth::updateUser');
 
 $routes->get('dashboard', 'Home::index', ['filter'=>'auth']);
 

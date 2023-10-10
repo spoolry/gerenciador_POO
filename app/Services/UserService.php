@@ -8,7 +8,8 @@ use CodeIgniter\Config\Factories;
 use CodeIgniter\Validation\Validation;
 use Config\Validation as ConfigValidation;
 
-class UserService{
+class UserService
+{
 
     protected $userModel;
 
@@ -17,12 +18,13 @@ class UserService{
         $this->userModel = Factories::models(UserModel::class);
     }
 
-    public function authenticate($name, $email, $password){
+    public function authenticate($name, $email, $password)
+    {
 
         $user = $this->userModel->getUser($email);
-       
-        if($user && password_verify($password, $user->password)){
-           
+
+        if ($user && password_verify($password, $user->password)) {
+
             $variavalDeSessao = [
                 'id' => $user->id,
                 'email' => $user->email,
@@ -31,41 +33,57 @@ class UserService{
                 'isLoggedIn' => true,
                 'user_locale' => getPreferredLanguage(['en', 'pt-BR'], session('user_locale')),
             ];
-            
+
             session()->set($variavalDeSessao);
             session()->setFlashdata('success', lang('App.successLogin', [], session('user_locale')));
             return true;
-        }else{
+        } else {
             session()->setFlashdata('error', lang('App.errorLogin'));
             return false;
         }
     }
 
-    public function createUser($userArray){
+    public function createUser($userArray)
+    {
 
         $user = new User();
-       
+
         $user->name = $userArray['nome'];
         $user->email = $userArray['email'];
         $user->password = $userArray['password'];
 
-    
-        if($this->userModel->save($user)){
+
+        if ($this->userModel->save($user)) {
             session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
             return redirect()->to('/');
-        }else{
-            return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
+        } else {
+            return redirect()->back()->withInput()->with('errors', $this->userModel->errors());
         }
-
     }
 
 
-    public function selfDelete($id){
-        if($this->userModel->delete($id)){
+    public function selfDelete($id)
+    {
+        if ($this->userModel->delete($id)) {
             return redirect()->to('/');
-        }else{
-            return redirect()->back()->withInput()->with('errors', $this->userModel->errors()); 
+        } else {
+            return redirect()->back()->withInput()->with('errors', $this->userModel->errors());
         }
     }
 
+    public function tryUpdate(User $user)
+    {
+        try {
+            if($user->hasChanged()){
+                $this->userModel->trySaveUser($user);
+            }
+        } catch (\Exception $e) {
+            die("Erro ao realizar o processo.");
+        }
+    }
+
+    public function getUser($id)
+    {
+        return $this->userModel->getId($id);
+    }
 }
