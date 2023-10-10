@@ -28,6 +28,12 @@ class UserModel extends Model
         $data['data']['created_at'] = date('Y-m-d H:i:s');
         return $data;
     }
+    protected $beforeUpdate   = ['setUpdatedAt'];
+    protected function setUpdatedAt(array $data)
+    {
+        $data['data']['updated_at'] = date('Y-m-d H:i:s');
+        return $data;
+    }
 
     protected $validationRules = [
         'name' => 'required|min_length[3]|',
@@ -40,4 +46,18 @@ class UserModel extends Model
         return $this->where('email', $email)->first();
     }
 
+    public function getId($id)
+    {
+        return $this->find($id);
+    }
+
+    public function trySaveUser(User $user){
+        try {
+            $this->db->transStart();
+            $this->protected(false)->save($user);
+            $this->db->transComplete();
+        } catch (\Exception $e) {
+            die("Erro ao salvar os dados.");
+        }
+    }
 }
