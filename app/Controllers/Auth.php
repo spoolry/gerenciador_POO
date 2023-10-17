@@ -59,11 +59,14 @@ class Auth extends BaseController
         $id = session('id');
 
         $this->userService->selfDelete($id);
+        return redirect()->to('/');
     }
 
     public function updateUser()
     {
-        $dataView = ['user' => $this->userService->getUser(5)];
+        $id = session('id');
+
+        $dataView = ['user' => $this->userService->getUser($id)];
 
         if ($data = $this->request->getPost()) {
 

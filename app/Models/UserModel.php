@@ -54,7 +54,7 @@ class UserModel extends Model
     public function trySaveUser(User $user){
         try {
             $this->db->transStart();
-            $this->protected(false)->save($user);
+            $this->save($user);
             $this->db->transComplete();
         } catch (\Exception $e) {
             die("Erro ao salvar os dados.");

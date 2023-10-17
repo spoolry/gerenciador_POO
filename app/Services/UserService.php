@@ -65,7 +65,7 @@ class UserService
     public function selfDelete($id)
     {
         if ($this->userModel->delete($id)) {
-            return redirect()->to('/');
+            return redirect()->to('/register');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->userModel->errors());
         }

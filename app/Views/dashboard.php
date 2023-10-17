@@ -18,3 +18,5 @@
 
 <a href="/language/en/">English</a> | <a href="/language/pt-BR/">Português</a> | <a href=""></a>
 
+<a href="/updateUser">Atualizar</a>
+

@@ -1,40 +1,54 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Entities\Eventos;
 use app\Models\EventosModel;
-use App\Models\UserModel;
-use App\Services\UserService;
+use App\Services\EventService;
+use CodeIgniter\Config\Factories;
 
 class EventController extends BaseController
 {
 
+    private $eventService;
+    private $eventoModel;
+
     public function __construct()
     {
-
+        $this->eventService = Factories::class(EventService::class);
+        $this->eventoModel = Factories::models(EventosModel::class);
     }
 
-    public function createEvento($event_id)
+    public function createEvento()
     {
-        // Verifique a autenticação do usuário aqui
+        if ($this->eventService->createEvento($this->request->getPost())) {
 
-        // Recupere os detalhes do evento do banco de dados usando um modelo
-        $eventosModel = new EventosModel();
-        $evento = $eventosModel->find($event_id);
-
-        if ($evento) {
-            // Verifique permissões aqui (por exemplo, se o usuário é o criador do evento)
-
-            // Carregue a visualização de edição com os detalhes do evento
-            return view('evento/edit', ['evento' => $evento]);
+            return redirect('/');
+            session()->setFlashdata('sucess', 'Evento cadastrado com sucesso.');
         } else {
-            // O evento não foi encontrado, redirecione ou exiba uma mensagem de erro
+            return redirect()->back()->withInput()->with('errors', $this->eventService->errors());
         }
     }
 
-    public function update()
+
+public function updateEvento($id){
+  if(!$this->request->getPost()){
+    $idEvento = $this->request->uri->getSegment(3);
+    $evento = $this->eventoModel->find($idEvento);
+    if($evento->creator ==  session('id'))
     {
-        // Processar a edição do evento aqui
-        // Valide os dados do formulário e atualize o registro no banco de dados
+        return view('update_evento', $evento);
+    }else{
+        session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
+        return redirect()->back();
     }
+  }else{
+    // fazer o update
+  }
+}
+        
+public function deleteEvento(){
+
+}
+
 }
