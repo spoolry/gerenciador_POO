@@ -9,4 +9,4 @@
     <button type="submit">Atualizar</button>
 </form>
 
-<a href="<?php echo base_url('deleteUser') ?>">Deletar</a>
+<a href="/deleteUser">Deletar</a>
