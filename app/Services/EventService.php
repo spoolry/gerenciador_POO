@@ -19,18 +19,11 @@ class EventService
     public function createEvent($eventArray)
     {
 
-        $evento = new Eventos();
-
-        $evento->name = $eventArray['nome'];
-        $evento->data_hora = $eventArray['data_hora'];
-        $evento->local = $eventArray['local'];
-        $evento->descricao = $eventArray['descricao'];
-        $evento->creator = $eventArray['creator'];
-        
-
+        $evento = new Eventos($eventArray);
+    
         if ($this->eventModel->save($evento)) {
             session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
-            return redirect()->to('/');
+            return redirect()->to('cadastrados');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventModel->errors());
         }

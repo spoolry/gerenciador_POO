@@ -18,5 +18,6 @@
 
 <a href="/language/en/">English</a> | <a href="/language/pt-BR/">Português</a> | <a href=""></a>
 
-<a href="/updateUser">Atualizar</a>
+<a href="/updateUser">Atualizar Usuário</a>
 
+<a href="/createEvento">Criar Evento</a>
