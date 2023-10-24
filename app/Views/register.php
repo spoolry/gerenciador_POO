@@ -7,10 +7,10 @@
 
 <form method="POST" action="/createUser">
     <label for="text">Nome:</label>
-    <input type="text" name="nome" id="nome" require />
+    <input type="text" name="nome" id="nome" required />
     <label for="text">Email:</label>
-    <input type="email" name="email" id="email" require/>
+    <input type="email" name="email" id="email" required/>
     <label for="text">Senha:</label>
-    <input type="password" name="password" id="password" require/>
+    <input type="password" name="password" id="password" required/>
     <button type="submit">Criar usuário</button>
 </form>

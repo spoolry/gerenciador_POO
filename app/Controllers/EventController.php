@@ -19,11 +19,17 @@ class EventController extends BaseController
         $this->eventoModel = Factories::models(EventosModel::class);
     }
 
+    public function cadastro()
+    {
+        echo view('create');
+    }
+
+
     public function createEvento()
     {
-        if ($this->eventService->createEvento($this->request->getPost())) {
+        if ($this->eventService->createEvent($this->request->getPost())) {
 
-            return redirect('/');
+            return redirect('cadastrados');
             session()->setFlashdata('sucess', 'Evento cadastrado com sucesso.');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventService->errors());
@@ -31,24 +37,30 @@ class EventController extends BaseController
     }
 
 
-public function updateEvento($id){
-  if(!$this->request->getPost()){
-    $idEvento = $this->request->uri->getSegment(3);
-    $evento = $this->eventoModel->find($idEvento);
-    if($evento->creator ==  session('id'))
+    public function updateEvento($id)
     {
-        return view('update_evento', $evento);
-    }else{
-        session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
-        return redirect()->back();
+        if (!$this->request->getPost()) {
+            $idEvento = $this->request->uri->getSegment(3);
+            $evento = $this->eventoModel->find($idEvento);
+            if ($evento->creator ==  session('id')) {
+                return view('update_evento', $evento);
+            } else {
+                session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
+                return redirect()->back();
+            }
+        } else {
+            // fazer o update
+        }
     }
-  }else{
-    // fazer o update
-  }
-}
-        
-public function deleteEvento(){
 
-}
+    public function deleteEvento()
+    {
+    }
 
+    public function showEvento()
+    {
+        $eventoModel = new EventosModel();
+        $data['eventos'] = $eventoModel->findAll();
+        return view('cadastrados', $data);
+    }
 }
