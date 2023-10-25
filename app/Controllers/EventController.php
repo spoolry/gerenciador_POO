@@ -29,7 +29,7 @@ class EventController extends BaseController
     {
         if ($this->eventService->createEvent($this->request->getPost())) {
 
-            return redirect('cadastrados');
+            return redirect()->to('/eventosCadastrados');
             session()->setFlashdata('sucess', 'Evento cadastrado com sucesso.');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventService->errors());
@@ -37,24 +37,39 @@ class EventController extends BaseController
     }
 
 
-    public function updateEvento($id)
-    {
-        if (!$this->request->getPost()) {
-            $idEvento = $this->request->uri->getSegment(3);
-            $evento = $this->eventoModel->find($idEvento);
-            if ($evento->creator ==  session('id')) {
-                return view('update_evento', $evento);
+    public function updateEvento($idEvento)
+    { 
+        // Verifica se eu estou enviando os dados via post do formulario
+        if ($this->request->getPost()) {
+            $data = $this->request->getPost();
+            $evento = $this->eventService->getEvento($idEvento);
+            if ($evento->creator === session()->get('id')) {
+                $evento->fill($data);
+                $event = new Eventos($data);
+                $this->eventService->updateEvent($evento); 
             } else {
                 session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
                 return redirect()->back();
             }
         } else {
-            // fazer o update
+            // pegar o evento pelo id
+            $event = $this->eventService->getEvento($idEvento);
+            if ($event->creator === session()->get('id')) {
+                $dataView['evento'] = $event;
+                return view('update_evento', $dataView);
+            }else{
+                session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
+                return redirect()->back();
+            }
         }
     }
 
     public function deleteEvento()
     {
+        $id = session('id');
+
+        $this->eventService->selfDelete($id);
+        return redirect()->to('/eventosCadastrados');
     }
 
     public function showEvento()

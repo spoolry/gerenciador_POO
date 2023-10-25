@@ -48,4 +48,9 @@ class EventService
             return redirect()->back()->withInput()->with('errors', $this->eventModel->errors());
         }
     }
+    public function getEvento($id){
+
+        return $this->eventModel->find($id);
+
+    }
 }

@@ -14,10 +14,13 @@ $routes->post('createUser', 'Auth::createUser');
 $routes->match(['get', 'post'], 'updateUser', 'Auth::updateUser');
 $routes->get('deleteUser', 'Auth::deleteUser');
 
-$routes->match(['get', 'post'], 'eventos/update/(:num)', 'EventController::updateEvento/$1');
+$routes->match(['get', 'post'], 'eventos/updateEvento/(:num)', 'EventController::updateEvento/$1');
+
 $routes->get('dashboard', 'Home::index', ['filter'=>'auth']);
+//$routes->get('updateEvento', 'EventController::updateEvento');
 
 $routes->get('language/{locale}', 'LanguageController::setLanguage');
 $routes->match(['get', 'post'], 'eventosCadastrados', 'EventController::showEvento');
 $routes->post('createEvento', 'EventController::createEvento');
 $routes->get('createEvento', 'EventController::cadastro');
+$routes->get('eventos Cadastrados', 'EventController::updateEvento');

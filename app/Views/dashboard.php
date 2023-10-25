@@ -21,3 +21,5 @@
 <a href="/updateUser">Atualizar Usuário</a>
 
 <a href="/createEvento">Criar Evento</a>
+
+<a href="/eventosCadastrados">Eventos Cadastrados</a>
