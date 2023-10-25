@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Cadastro de Eventos</title>
 </head>
+
 <body>
     <h1>Cadastro de Eventos</h1>
 
@@ -23,4 +25,5 @@
         <input type="submit" value="Cadastrar Evento">
     </form>
 </body>
+
 </html>

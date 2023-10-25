@@ -9,7 +9,7 @@ class Eventos extends Entity
     protected $datamap = [];
     protected $attributes = [
         'id' => null,
-        'name'=> null,
+        'name' => null,
         'data_hora' => null,
         'local' => null,
         'descricao' => null,

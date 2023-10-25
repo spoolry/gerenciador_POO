@@ -15,7 +15,7 @@ $routes->match(['get', 'post'], 'updateUser', 'Auth::updateUser');
 $routes->get('deleteUser', 'Auth::deleteUser');
 
 $routes->match(['get', 'post'], 'eventos/update/(:num)', 'EventController::updateEvento/$1');
-$routes->get('dashboard', 'Home::index', ['filter'=>'auth']);
+$routes->get('dashboard', 'Home::index', ['filter' => 'auth']);
 
 $routes->get('language/{locale}', 'LanguageController::setLanguage');
 $routes->match(['get', 'post'], 'eventosCadastrados', 'EventController::showEvento');
