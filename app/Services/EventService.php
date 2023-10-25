@@ -20,7 +20,7 @@ class EventService
     {
 
         $evento = new Eventos($eventArray);
-    
+
         if ($this->eventModel->save($evento)) {
             session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
             return redirect()->to('cadastrados');
@@ -38,7 +38,7 @@ class EventService
         } catch (\Exception $e) {
             die("Erro ao realizar o processo.");
         }
-    }
+    } 
 
     public function deleteEvent($id)
     {
@@ -47,5 +47,10 @@ class EventService
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventModel->errors());
         }
+    }
+
+    public function getEvento($id)
+    {
+        return $this->eventModel->getId($id);
     }
 }

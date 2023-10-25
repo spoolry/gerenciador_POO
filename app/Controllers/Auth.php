@@ -74,6 +74,7 @@ class Auth extends BaseController
             $user->fill($data);
             $user = new User($data);
             $this->userService->tryUpdate($user);
+            return redirect()->to('/dashboard');
         } else {
             return view('update', $dataView);
         }

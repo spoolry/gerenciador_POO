@@ -29,7 +29,7 @@ class EventController extends BaseController
     {
         if ($this->eventService->createEvent($this->request->getPost())) {
 
-            return redirect('cadastrados');
+            return redirect()->to('/eventosCadastrados');
             session()->setFlashdata('sucess', 'Evento cadastrado com sucesso.');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventService->errors());
@@ -37,12 +37,12 @@ class EventController extends BaseController
     }
 
 
-    public function updateEvento($id)
+    public function updateEvento($idEvento)
     {
         if (!$this->request->getPost()) {
             $idEvento = $this->request->uri->getSegment(3);
             $evento = $this->eventoModel->find($idEvento);
-            if ($evento->creator ==  session('id')) {
+            if ($evento->creator ==  session()->get('id')) {
                 return view('update_evento', $evento);
             } else {
                 session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
@@ -61,6 +61,6 @@ class EventController extends BaseController
     {
         $eventoModel = new EventosModel();
         $data['eventos'] = $eventoModel->findAll();
-        return view('cadastrados', $data);
+        return view('/cadastrados', $data);
     }
 }
