@@ -9,16 +9,19 @@
     <h1>Eventos Cadastrados</h1>
 
     <?php
-    foreach ($eventos as $evento) :
-        echo "Nome: " . $evento->name;
-        echo "<br>";
-        echo "Local: " . $evento->local;
-        echo "<br>";
-        echo "Data/Hora: " . timestamp2br($evento->data_hora);
-        echo "<br>";
-        echo "Descrição: " . $evento->descricao;
-        echo "<hr>";
-    endforeach ?>
+
+    foreach ($eventos as $evento) : ?>
+            <?php echo "nOME:" . $evento->name ?> <br><br>
+            <?php echo $evento->local ?> <br><br>
+            <?php echo $evento->data_hora, timestamp2br('d/m/y') ?><br><br>
+            <?php echo $evento->descricao ?><br><br>
+            <?php echo $evento->creator ?> <br><br>
+
+        </form>
+    <?php endforeach ?>
+    <a href="<?php echo base_url('eventos/updateEvento/'. $evento->id) ?>">Atualizar</a>
+    <a href="/deleteEvento">Deletar</a>
+
 </body>
 
 </html>

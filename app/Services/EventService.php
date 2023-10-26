@@ -49,8 +49,9 @@ class EventService
         }
     }
 
-    public function getEvento($id)
-    {
-        return $this->eventModel->getId($id);
+    public function getEvento($id){
+
+        return $this->eventModel->find($id);
+
     }
 }
