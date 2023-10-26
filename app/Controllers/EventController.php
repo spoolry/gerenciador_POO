@@ -38,6 +38,7 @@ class EventController extends BaseController
 
 
     public function updateEvento($idEvento)
+
     { 
         // Verifica se eu estou enviando os dados via post do formulario
         if ($this->request->getPost()) {
@@ -76,6 +77,6 @@ class EventController extends BaseController
     {
         $eventoModel = new EventosModel();
         $data['eventos'] = $eventoModel->findAll();
-        return view('cadastrados', $data);
+        return view('/cadastrados', $data);
     }
 }

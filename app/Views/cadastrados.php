@@ -9,6 +9,7 @@
     <h1>Eventos Cadastrados</h1>
 
     <?php
+
     foreach ($eventos as $evento) : ?>
             <?php echo "nOME:" . $evento->name ?> <br><br>
             <?php echo $evento->local ?> <br><br>
@@ -20,6 +21,7 @@
     <?php endforeach ?>
     <a href="<?php echo base_url('eventos/updateEvento/'. $evento->id) ?>">Atualizar</a>
     <a href="/deleteEvento">Deletar</a>
+
 </body>
 
 </html>
