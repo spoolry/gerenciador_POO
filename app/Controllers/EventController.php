@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Entities\Eventos;
-use app\Models\EventosModel;
+use App\Entities\Event;
+use app\Models\EventModel;
 use App\Services\EventService;
 use CodeIgniter\Config\Factories;
 
@@ -11,25 +11,25 @@ class EventController extends BaseController
 {
 
     private $eventService;
-    private $eventoModel;
+    private $eventModel;
 
     public function __construct()
     {
         $this->eventService = Factories::class(EventService::class);
-        $this->eventoModel = Factories::models(EventosModel::class);
+        $this->eventModel = Factories::models(EventModel::class);
     }
 
-    public function cadastro()
+    public function registerEvent()
     {
-        echo view('create');
+        echo view('createEvent');
     }
 
 
-    public function createEvento()
+    public function createEvent()
     {
         if ($this->eventService->createEvent($this->request->getPost())) {
 
-            return redirect()->to('/eventosCadastrados');
+            return redirect()->to('/registerEvent');
             session()->setFlashdata('sucess', 'Evento cadastrado com sucesso.');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventService->errors());
@@ -37,27 +37,27 @@ class EventController extends BaseController
     }
 
 
-    public function updateEvento($idEvento)
+    public function updateEvent($idEvent)
 
     { 
         // Verifica se eu estou enviando os dados via post do formulario
         if ($this->request->getPost()) {
             $data = $this->request->getPost();
-            $evento = $this->eventService->getEvento($idEvento);
-            if ($evento->creator === session()->get('id')) {
-                $evento->fill($data);
-                $event = new Eventos($data);
-                $this->eventService->updateEvent($evento); 
+            $event = $this->eventService->getEvent($idEvent);
+            if ($event->creator === session()->get('id')) {
+                $event->fill($data);
+                $event = new EventModel($data);
+                $this->eventService->updateEvent($event); 
             } else {
                 session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
                 return redirect()->back();
             }
         } else {
             // pegar o evento pelo id
-            $event = $this->eventService->getEvento($idEvento);
+            $event = $this->eventService->getEvent($idEvent);
             if ($event->creator === session()->get('id')) {
-                $dataView['evento'] = $event;
-                return view('update_evento', $dataView);
+                $dataView['event'] = $event;
+                return view('updateEvent', $dataView);
             }else{
                 session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
                 return redirect()->back();
@@ -65,18 +65,18 @@ class EventController extends BaseController
         }
     }
 
-    public function deleteEvento()
+    public function deleteEvent()
     {
         $id = session('id');
 
         $this->eventService->selfDelete($id);
-        return redirect()->to('/eventosCadastrados');
+        return redirect()->to('/registeredEvent');
     }
 
-    public function showEvento()
+    public function showEvent()
     {
-        $eventoModel = new EventosModel();
-        $data['eventos'] = $eventoModel->findAll();
-        return view('/cadastrados', $data);
+        $eventModel = new EventModel();
+        $data['events'] = $eventModel->findAll();
+        return view('/registeredEvent', $data);
     }
 }

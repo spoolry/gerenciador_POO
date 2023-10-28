@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Entities\Eventos;
+use App\Entities\Event;
 use CodeIgniter\Model;
 
-class EventosModel extends Model
+class EventModel extends Model
 {
-    protected $table            = 'eventos';
-    protected $allowedFields    = ['name', 'data_hora', 'local', 'descricao', 'creator'];
-    protected $returnType = Eventos::class;
+    protected $table            = 'events';
+    protected $allowedFields    = ['name', 'datetime', 'local', 'description', 'creator'];
+    protected $returnType = Event::class;
     protected $DBGroup          = 'default';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
@@ -39,9 +39,9 @@ class EventosModel extends Model
     // Validation
     protected $validationRules = [
         'name' => 'required|min_length[3]|',
-        'data_hora' => 'required',
+        'datetime' => 'required',
         'local' => 'required|min_length[2]',
-        'descricao' => 'min_length[6]',
+        'description' => 'min_length[6]',
     ];
 
     protected $validationMessages   = [];
