@@ -12,17 +12,17 @@ class UserService
 {
 
     protected $userModel;
+    protected $userService;
 
     public function __construct()
     {
         $this->userModel = Factories::models(UserModel::class);
     }
 
-    public function authenticate($name, $email, $password)
+    public function authenticate($email, $password)
     {
-
         $user = $this->userModel->getUser($email);
-
+        
         if ($user && password_verify($password, $user->password)) {
 
             $variavalDeSessao = [
@@ -48,7 +48,7 @@ class UserService
 
         $user = new User();
 
-        $user->name = $userArray['nome'];
+        $user->name = $userArray['name'];
         $user->email = $userArray['email'];
         $user->password = $userArray['password'];
 
@@ -65,7 +65,7 @@ class UserService
     public function selfDelete($id)
     {
         if ($this->userModel->delete($id)) {
-            return redirect()->to('/register');
+            return redirect()->to('/registerUser');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->userModel->errors());
         }

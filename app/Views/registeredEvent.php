@@ -11,10 +11,10 @@
     <?php
 
     foreach ($eventos as $evento) : ?>
-            <?php echo "nOME:" . $evento->name ?> <br><br>
-            <?php echo $evento->local ?> <br><br>
-            <?php echo $evento->data_hora, timestamp2br('d/m/y') ?><br><br>
-            <?php echo $evento->descricao ?><br><br>
+            <?php echo "Nome do Evento: " . $evento->name ?> <br><br>
+            <?php echo "Local: " . $evento->local ?> <br><br>
+            <?php echo "Data/Hora: " . $evento->data_hora, timestamp2br('d/m/y') ?><br><br>
+            <?php echo "Descrição: " . $evento->descricao ?><br><br>
             <?php echo $evento->creator ?> <br><br>
 
         </form>

@@ -7,7 +7,7 @@ use App\Entities\User;
 use App\Services\UserService;
 use CodeIgniter\Config\Factories;
 
-class Auth extends BaseController
+class UserController extends BaseController
 {
 
     private $userService;
@@ -22,19 +22,19 @@ class Auth extends BaseController
         echo view('login');
     }
 
-    public function register()
+    public function registerUser()
     {
-        echo view('register');
+        echo view('registerUser');
     }
 
     public function authenticate()
     {
 
-        $name = $this->request->getPost('nome');
+        $name = $this->request->getPost('name');
         $email = $this->request->getPost('email');
-        $senha = $this->request->getPost('senha');
+        $password = $this->request->getPost('password');
 
-        return ($this->userService->authenticate($name, $email, $senha)) ? redirect()->to('/dashboard') : redirect()->back();
+        return ($this->userService->authenticate($email, $password)) ? redirect()->to('/dashboard') : redirect()->back();
     }
 
     public function createUser()
@@ -76,7 +76,7 @@ class Auth extends BaseController
             $this->userService->tryUpdate($user);
             return redirect()->to('/dashboard');
         } else {
-            return view('update', $dataView);
+            return view('updateUser', $dataView);
         }
     }
 }

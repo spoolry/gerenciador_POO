@@ -19,7 +19,7 @@ class Eventos extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '100',
             ],
-            'data_hora' => [
+            'datetime' => [
                 'type' => 'datetime',
                 'default' => null,
             ],
@@ -27,7 +27,7 @@ class Eventos extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '100',
             ],
-            'descricao' => [
+            'description' => [
                 'type' => 'text',
             ],
             'creator' => [
@@ -54,11 +54,11 @@ class Eventos extends Migration
 
         $this->forge->addKey('id', true);
         $this->forge->addKey('creator', false);
-        $this->forge->createTable('eventos');
+        $this->forge->createTable('events');
     }
 
     public function down()
     {
-        $this->forge->dropTable('eventos');
+        $this->forge->dropTable('events');
     }
 }

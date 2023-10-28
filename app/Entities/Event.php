@@ -4,15 +4,15 @@ namespace App\Entities;
 
 use CodeIgniter\Entity\Entity;
 
-class Eventos extends Entity
+class Event extends Entity
 {
     protected $datamap = [];
     protected $attributes = [
         'id' => null,
         'name' => null,
-        'data_hora' => null,
+        'datetime' => null,
         'local' => null,
-        'descricao' => null,
+        'description' => null,
         'creator' => null,
     ];
     protected $dates   = ['created_at', 'updated_at', 'deleted_at'];

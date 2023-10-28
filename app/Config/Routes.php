@@ -6,20 +6,20 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-$routes->get('/', 'Auth::index');
-$routes->post('authenticate', 'Auth::authenticate');
-$routes->get('logout', 'Auth::logout');
-$routes->get('register', 'Auth::register');
-$routes->post('createUser', 'Auth::createUser');
-$routes->match(['get', 'post'], 'updateUser', 'Auth::updateUser');
-$routes->get('deleteUser', 'Auth::deleteUser');
+$routes->get('/', 'UserController::index');
+$routes->post('authenticate', 'UserController::authenticate');
+$routes->get('logout', 'UserController::logout');
+$routes->get('registerUser', 'UserController::registerUser');
+$routes->post('createUser', 'UserController::createUser');
+$routes->match(['get', 'post'], 'updateUser', 'UserController::updateUser');
+$routes->get('deleteUser', 'UserController::deleteUser');
 
 
-$routes->match(['get', 'post'], 'eventos/update/(:num)', 'EventController::updateEvento/$1');
-$routes->get('dashboard', 'Home::index', ['filter' => 'auth']);
+$routes->match(['get', 'post'], 'events/update/(:num)', 'EventController::updateEvent/$1');
+$routes->get('dashboard', 'HomeController::index', ['filter' => 'auth']);
 
 $routes->get('language/{locale}', 'LanguageController::setLanguage');
-$routes->match(['get', 'post'], 'eventosCadastrados', 'EventController::showEvento');
-$routes->post('createEvento', 'EventController::createEvento');
-$routes->get('createEvento', 'EventController::cadastro');
-$routes->get('eventos Cadastrados', 'EventController::updateEvento');
+$routes->match(['get', 'post'], 'registeredEvent', 'EventController::showEvent');
+$routes->post('registerEvent', 'EventController::createEvent');
+$routes->get('createEvent', 'EventController::registerEvent');
+$routes->get('registeredEvent', 'EventController::updateEvent');
