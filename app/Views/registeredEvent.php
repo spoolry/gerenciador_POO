@@ -11,6 +11,7 @@
     <h1>Eventos Cadastrados</h1>
 
     <?php
+
     foreach ($events as $event) :
         echo "Nome: " . $event->name;
         echo "<br>";

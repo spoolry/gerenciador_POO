@@ -24,7 +24,6 @@ class EventController extends BaseController
         echo view('createEvent');
     }
 
-
     public function createEvent()
     {
         if ($this->eventService->createEvent($this->request->getPost())) {
@@ -48,6 +47,7 @@ class EventController extends BaseController
                 $event->fill($data);
                 $event = new Event($data);
                 $this->eventService->updateEvent($event); 
+
             } else {
                 session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
                 return redirect()->back();

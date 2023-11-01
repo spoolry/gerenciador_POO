@@ -45,6 +45,16 @@ class EventModel extends Model
         'description' => 'min_length[6]',
     ];
 
+    public function trySaveEvent(Event $event){
+        try {
+            $this->db->transStart();
+            $this->save($event);
+            $this->db->transComplete();
+        } catch (\Exception $e) {
+            die("Erro ao salvar os dados.");
+        }
+    }
+
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

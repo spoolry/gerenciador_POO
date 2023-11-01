@@ -38,7 +38,7 @@ class EventService
         } catch (\Exception $e) {
             die("Erro ao realizar o processo.");
         }
-    } 
+    }
 
     public function deleteEvent($id)
     {
@@ -49,9 +49,9 @@ class EventService
         }
     }
 
-    public function getEvent($id){
+    public function getEvent($id)
+    {
 
         return $this->eventModel->find($id);
-
     }
 }
