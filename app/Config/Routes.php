@@ -15,11 +15,10 @@ $routes->match(['get', 'post'], 'updateUser', 'UserController::updateUser');
 $routes->get('deleteUser', 'UserController::deleteUser');
 
 
-$routes->match(['get', 'post'], 'events/update/(:num)', 'EventController::updateEvent/$1');
+$routes->match(['get', 'post'], 'event/updateEvent/(:num)', 'EventController::updateEvent/$1');
 $routes->get('dashboard', 'HomeController::index', ['filter' => 'auth']);
 
 $routes->get('language/{locale}', 'LanguageController::setLanguage');
 $routes->match(['get', 'post'], 'registeredEvent', 'EventController::showEvent');
-$routes->post('registerEvent', 'EventController::createEvent');
+$routes->post('createEvent', 'EventController::createEvent');
 $routes->get('createEvent', 'EventController::registerEvent');
-$routes->get('registeredEvent', 'EventController::updateEvent');

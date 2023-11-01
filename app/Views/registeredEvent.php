@@ -1,3 +1,5 @@
+</html>
+
 <!DOCTYPE html>
 <html>
 
@@ -9,19 +11,19 @@
     <h1>Eventos Cadastrados</h1>
 
     <?php
-
-    foreach ($eventos as $evento) : ?>
-            <?php echo "Nome do Evento: " . $evento->name ?> <br><br>
-            <?php echo "Local: " . $evento->local ?> <br><br>
-            <?php echo "Data/Hora: " . $evento->data_hora, timestamp2br('d/m/y') ?><br><br>
-            <?php echo "Descrição: " . $evento->descricao ?><br><br>
-            <?php echo $evento->creator ?> <br><br>
-
-        </form>
-    <?php endforeach ?>
-    <a href="<?php echo base_url('eventos/updateEvento/'. $evento->id) ?>">Atualizar</a>
-    <a href="/deleteEvento">Deletar</a>
-
+    foreach ($events as $event) :
+        echo "Nome: " . $event->name;
+        echo "<br>";
+        echo "Local: " . $event->local;
+        echo "<br>";
+        echo "Data/Hora: " . timestamp2br($event->date_time);
+        echo "<br>";
+        echo "Descrição: " . $event->description;
+        echo "<hr>";
+    endforeach ?>
 </body>
+
+<a href="<?php echo base_url('event/updateEvent/' . $event->id) ?>">Atualizar</a>
+<a href="<?php echo base_url('event/deleteEvent/' . $event->id) ?>">Deletar</a>
 
 </html>

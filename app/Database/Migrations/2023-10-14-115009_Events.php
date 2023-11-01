@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Eventos extends Migration
+class Events extends Migration
 {
     public function up()
     {
@@ -19,7 +19,7 @@ class Eventos extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '100',
             ],
-            'datetime' => [
+            'date_time' => [
                 'type' => 'datetime',
                 'default' => null,
             ],

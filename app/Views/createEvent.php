@@ -15,8 +15,8 @@
         <label for="local">Local:</label>
         <input type="text" id="local" name="local" required><br><br>
 
-        <label for="datetime">Data e hora:</label>
-        <input type="datetime-local" id="data_hora" name="datetime" required><br><br>
+        <label for="date_time">Data e hora:</label>
+        <input type="datetime-local" id="date_time" name="date_time" required><br><br>
 
         <label for="description">Descrição:</label><br>
         <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>

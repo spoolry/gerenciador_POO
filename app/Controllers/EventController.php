@@ -29,7 +29,7 @@ class EventController extends BaseController
     {
         if ($this->eventService->createEvent($this->request->getPost())) {
 
-            return redirect()->to('/registerEvent');
+            return redirect()->to('/registeredEvent');
             session()->setFlashdata('sucess', 'Evento cadastrado com sucesso.');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventService->errors());
@@ -46,7 +46,7 @@ class EventController extends BaseController
             $event = $this->eventService->getEvent($idEvent);
             if ($event->creator === session()->get('id')) {
                 $event->fill($data);
-                $event = new EventModel($data);
+                $event = new Event($data);
                 $this->eventService->updateEvent($event); 
             } else {
                 session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
