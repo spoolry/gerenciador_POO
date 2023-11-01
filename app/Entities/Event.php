@@ -10,7 +10,7 @@ class Event extends Entity
     protected $attributes = [
         'id' => null,
         'name' => null,
-        'datetime' => null,
+        'date_time' => null,
         'local' => null,
         'description' => null,
         'creator' => null,
