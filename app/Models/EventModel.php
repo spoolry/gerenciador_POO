@@ -8,7 +8,7 @@ use CodeIgniter\Model;
 class EventModel extends Model
 {
     protected $table            = 'events';
-    protected $allowedFields    = ['name', 'datetime', 'local', 'description', 'creator'];
+    protected $allowedFields    = ['name', 'date_time', 'local', 'description', 'creator'];
     protected $returnType = Event::class;
     protected $DBGroup          = 'default';
     protected $primaryKey       = 'id';
@@ -39,10 +39,20 @@ class EventModel extends Model
     // Validation
     protected $validationRules = [
         'name' => 'required|min_length[3]|',
-        'datetime' => 'required',
+        'date_time' => 'required',
         'local' => 'required|min_length[2]',
         'description' => 'min_length[6]',
     ];
+
+    public function trySaveEvent(Event $event){
+        try {
+            $this->db->transStart();
+            $this->save($event);
+            $this->db->transComplete();
+        } catch (\Exception $e) {
+            die("Erro ao salvar os dados.");
+        }
+    }
 
     protected $validationMessages   = [];
     protected $skipValidation       = false;

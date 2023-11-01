@@ -19,11 +19,11 @@ class EventService
     public function createEvent($eventArray)
     {
 
-        $event = new EventModel($eventArray);
+        $event = new Event($eventArray);
 
         if ($this->eventModel->save($event)) {
             session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
-            return redirect()->to('cadastrados');
+            return redirect()->to('registeredEvent');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventModel->errors());
         }
@@ -33,12 +33,12 @@ class EventService
     {
         try {
             if ($event->hasChanged()) {
-                $this->eventModel->trySaveUser($event);
+                $this->eventModel->trySaveEvent($event);
             }
         } catch (\Exception $e) {
             die("Erro ao realizar o processo.");
         }
-    } 
+    }
 
     public function deleteEvent($id)
     {
@@ -49,9 +49,9 @@ class EventService
         }
     }
 
-    public function getEvent($id){
+    public function getEvent($id)
+    {
 
         return $this->eventModel->find($id);
-
     }
 }
