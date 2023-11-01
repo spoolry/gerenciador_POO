@@ -1,4 +1,4 @@
-<form method="POST" action="/updateUser">
+<form method="POST" action="<?php echo base_url('event/updateEvent') ?>">
     <input type="hidden" name="id" id="id" value="<?php echo $user->id ?>" />
     <label for="text">Nome:</label>
     <input type="text" name="name" id="name" value="<?php echo $user->name ?>" required />
@@ -9,4 +9,4 @@
     <button type="submit">Atualizar</button>
 </form>
 
-<a href="/deleteUser">Deletar</a>
+<a href='<?php echo base_url('event/deleteEvent/'. $event->id) ?>'>Deletar</a>
