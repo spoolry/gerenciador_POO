@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Entities\User;
+use App\Models\UserModel;
 use App\Services\UserService;
 use CodeIgniter\Config\Factories;
 
@@ -70,9 +71,10 @@ class UserController extends BaseController
 
         if ($data = $this->request->getPost()) {
 
+            $user = new UserModel();
             $user = $this->userService->getUser($data['id']);
             $user->fill($data);
-            $user = new User($data);
+            
             $this->userService->tryUpdate($user);
             return redirect()->to('/dashboard');
         } else {
