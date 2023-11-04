@@ -40,12 +40,13 @@ class EventModel extends Model
     // Validation
     protected $validationRules = [
         'name' => 'required|min_length[3]|',
-        'date_time' => 'required',
+        'datetime' => 'required',
         'local' => 'required|min_length[2]',
         'description' => 'min_length[6]',
     ];
 
-    public function trySaveEvent(Event $event){
+    public function SaveEvent(Event $event)
+    {
         try {
             $this->db->transStart();
             $this->save($event);

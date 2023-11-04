@@ -17,7 +17,7 @@
         echo "<br>";
         echo "Local: " . $event->local;
         echo "<br>";
-        echo "Data/Hora: " . timestamp2br($event->date_time);
+        echo "Data/Hora: " . timestamp2br($event->datetime);
         echo "<br>";
         echo "Descrição: " . $event->description;
         echo "<hr>";
@@ -25,6 +25,6 @@
 </body>
 
 <a href="<?php echo base_url('event/updateEvent/' . $event->id) ?>">Atualizar</a>
-<a href="<?php echo base_url('event/deleteEvent/' . $event->id) ?>">Deletar</a>
+<a href="<?php echo base_url('deleteEvent/' . $event->id) ?>">Deletar</a>
 
 </html>
