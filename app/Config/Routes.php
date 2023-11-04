@@ -21,4 +21,3 @@ $routes->get('dashboard', 'HomeController::index', ['filter' => 'auth']);
 $routes->get('language/{locale}', 'LanguageController::setLanguage');
 $routes->match(['get', 'post'], 'registeredEvent', 'EventController::showEvent');
 $routes->post('createEvent', 'EventController::createEvent');
-$routes->get('createEvent', 'EventController::registerEvent');

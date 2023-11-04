@@ -33,7 +33,7 @@ class EventService
     {
         try {
             if ($event->hasChanged()) {
-                $this->eventModel->trySaveEvent($event);
+                $this->eventModel->SaveEvent($event);
             }
         } catch (\Exception $e) {
             die("Erro ao realizar o processo.");

@@ -28,7 +28,7 @@ class UserService
             $variavalDeSessao = [
                 'id' => $user->id,
                 'email' => $user->email,
-                'data_login' => bd2br(date('Y-m-d')),
+                'data_login' => bd2br(date('Y-m-d, H:s')),
                 'data_cad' => $user->created_at,
                 'isLoggedIn' => true,
                 'user_locale' => getPreferredLanguage(['en', 'pt-BR'], session('user_locale')),
@@ -57,7 +57,7 @@ class UserService
             session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
             return redirect()->to('/');
         } else {
-            return redirect()->back()->withInput()->with('errors', $this->userModel->errors());
+            return redirect()->with('error', 'Email já cadastrado!');
         }
     }
 

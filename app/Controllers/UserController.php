@@ -60,7 +60,8 @@ class UserController extends BaseController
         $id = session('id');
 
         $this->userService->selfDelete($id);
-        return redirect()->to('/');
+        return redirect()->to('/')->with('success', 'Usuário deletado com sucesso.');
+
     }
 
     public function updateUser()

@@ -44,8 +44,8 @@ class EventController extends BaseController
             $data = $this->request->getPost();
             $event = $this->eventService->getEvent($idEvent);
             if ($event->creator === session()->get('id')) {
-                $event->fill($data);
                 $event = new Event($data);
+                $event->fill($data);
                 $this->eventService->updateEvent($event); 
 
             } else {
