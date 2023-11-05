@@ -38,27 +38,17 @@ class EventController extends BaseController
 
     public function updateEvent($idEvent)
 
-    { 
+    {
         // Verifica se eu estou enviando os dados via post do formulario
-        if ($this->request->getPost()) {
-            $data = $this->request->getPost();
+        if ($data = $this->request->getPost()) {
             $event = $this->eventService->getEvent($idEvent);
             if ($event->creator === session()->get('id')) {
-                $event = new Event($data);
-                $event->fill($data);
-                $this->eventService->updateEvent($event); 
-
-            } else {
-                session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
-                return redirect()->back();
-            }
-        } else {
-            // pegar o evento pelo id
-            $event = $this->eventService->getEvent($idEvent);
-            if ($event->creator === session()->get('id')) {
+                $this->eventService->updateEvent($event);
                 $dataView['event'] = $event;
-                return view('updateEvent', $dataView);
-            }else{
+                $event = new EventModel();
+                $event->fill($data);     
+                return view('updateEvent', $data);
+            } else {
                 session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
                 return redirect()->back();
             }

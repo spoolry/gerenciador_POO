@@ -8,7 +8,7 @@ use CodeIgniter\Model;
 class EventModel extends Model
 {
     protected $table            = 'events';
-    protected $allowedFields    = ['name', 'date_time', 'local', 'description', 'creator'];
+    protected $allowedFields    = ['name', 'datetime', 'local', 'description', 'creator'];
     protected $returnType = Event::class;
     protected $DBGroup          = 'default';
     protected $primaryKey       = 'id';
@@ -30,7 +30,7 @@ class EventModel extends Model
         return $data;
     }
 
-    protected $beforeUpdate   = ['setUpdatedAt'];
+    protected $beforeUpdate = ['setUpdatedAt'];
     protected function setUpdatedAt(array $data)
     {
         $data['data']['updated_at'] = date('Y-m-d H:i:s');
@@ -69,14 +69,4 @@ class EventModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function trySaveEvent(Event $event)
-    {
-        try {
-            $this->db->transStart();
-            $this->save($event);
-            $this->db->transComplete();
-        } catch (\Exception $e) {
-            die("Erro ao salvar os dados.");
-        }
-    }
 }
