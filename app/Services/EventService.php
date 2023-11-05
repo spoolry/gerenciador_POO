@@ -23,7 +23,7 @@ class EventService
 
         if ($this->eventModel->save($event)) {
             session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
-            return redirect()->to('registeredEvent');
+            return redirect()->to('/registeredEvent');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventModel->errors());
         }
