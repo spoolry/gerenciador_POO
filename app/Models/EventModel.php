@@ -18,7 +18,7 @@ class EventModel extends Model
 
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -68,14 +68,4 @@ class EventModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function trySaveEvent(Event $event)
-    {
-        try {
-            $this->db->transStart();
-            $this->save($event);
-            $this->db->transComplete();
-        } catch (\Exception $e) {
-            die("Erro ao salvar os dados.");
-        }
-    }
 }
