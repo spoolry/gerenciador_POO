@@ -21,7 +21,7 @@ class EventService
 
         $event = new Event($eventArray);
 
-        if ($this->eventModel->save($event)) {
+        if ($this->eventModel->SaveEvent($event)) {
             session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
             return redirect()->to('/registeredEvent');
         } else {

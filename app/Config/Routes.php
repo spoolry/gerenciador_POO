@@ -23,3 +23,4 @@ $routes->match(['get', 'post'], 'registeredEvent', 'EventController::showEvent')
 $routes->get('createEvent', 'EventController::registerEvent');
 $routes->post('createEvent', 'EventController::createEvent');
 
+$routes->get('event/deleteEvent/(:num)', 'EventController::deleteEvent/$1');
