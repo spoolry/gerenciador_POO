@@ -29,7 +29,7 @@ class EventController extends BaseController
         if ($this->eventService->createEvent($this->request->getPost())) {
 
             return redirect()->to('/registeredEvent');
-            session()->setFlashdata('sucess', 'Evento cadastrado com sucesso.');
+            session()->setFlashdata('success', 'Evento cadastrado com sucesso.');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->eventService->errors());
         }
@@ -40,14 +40,26 @@ class EventController extends BaseController
 
     {
         // Verifica se eu estou enviando os dados via post do formulario
-        if ($data = $this->request->getPost()) {
+        if ($this->request->getPost()) {
+            $data = $this->request->getPost();
+            $event = $this->eventService->getEvent($idEvent);
+
+            if ($event->creator === session()->get('id')) {
+                $event->fill($data);
+                $this->eventService->updateEvent($event);
+                session()->setFlashdata('success', 'Evento alterado com sucesso.');
+                return redirect()->to('/registeredEvent');
+
+            } else {
+                session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
+                return redirect()->back();
+            }
+        } else {
+            // pegar o evento pelo id
             $event = $this->eventService->getEvent($idEvent);
             if ($event->creator === session()->get('id')) {
-                $this->eventService->updateEvent($event);
                 $dataView['event'] = $event;
-                $event = new EventModel();
-                $event->fill($data);     
-                return view('updateEvent', $data);
+                return view('updateEvent', $dataView);
             } else {
                 session()->setFlashdata('error', 'Você não tem permissão para alterar este registro.');
                 return redirect()->back();
@@ -55,11 +67,9 @@ class EventController extends BaseController
         }
     }
 
-    public function deleteEvent()
+    public function deleteEvent($id)
     {
-        $id = session('id');
-
-        $this->eventService->selfDelete($id);
+        $this->eventService->deleteEvent($id);
         return redirect()->to('/registeredEvent');
     }
 
