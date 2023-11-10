@@ -44,9 +44,14 @@ class VoucherModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getVoucher($event_id, $user_id)
+
+    public function getVouchersWithRelations()
     {
-        $event_id = $this->where('id', $event_id)->first();
-        $user_id = $this->where('id', $user_id)->first();
+
+        $this->select('vouchers.*, events.name, users.name');
+        $this->join('events', 'vouchers.event_id = events.id');
+        $this->join('users', 'vouchers.user_id = users.id');
+        $this->where('vouchers.user_id', session('id_user'));
+        return $this->findAll();
     }
 }

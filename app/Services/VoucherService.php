@@ -6,6 +6,7 @@ use App\Entities\Voucher;
 use App\Models\VoucherModel;
 use CodeIgniter\Config\Factories;
 use CodeIgniter\Validation\Validation;
+use CodeIgniter\Database\RawSql;
 
 class VoucherService
 {
@@ -16,8 +17,8 @@ class VoucherService
         $this->voucherModel = Factories::models(VoucherModel::class);
     }
 
-    public function showVoucher($event_id, $user_id)
+    public function getVoucher()
     {
-        $voucher = $this->voucherModel->getVoucher($event_id, $user_id);
+        return $this->voucherModel->getVouchersWithRelations();
     }
 }
