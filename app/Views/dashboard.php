@@ -23,3 +23,5 @@
 <a href="/createEvent">Criar Evento</a>
 
 <a href="/registeredEvent">Eventos Cadastrados</a>
+    
+<a href="/showVoucher">Vouchers</a>
