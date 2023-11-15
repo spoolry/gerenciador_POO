@@ -3,18 +3,19 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Entities\Voucher;
 use App\Models\VoucherModel;
 use App\Services\VoucherService;
 use CodeIgniter\Config\Factories;
 
 class VoucherController extends BaseController
 {
-    private $voucherModel;
     private $voucherServices;
+
+
 
     public function __construct()
     {
-        $this->voucherModel = Factories::models(VoucherModel::class);
         $this->voucherServices = Factories::class(VoucherService::class);
     }
 
@@ -22,5 +23,18 @@ class VoucherController extends BaseController
     {
         $data['vouchers'] = $this->voucherServices->getVoucher();
         return view('vouchers', $data);
+    }
+
+    public function confirmed($data)
+    {
+        $this->request->getPost($data);
+
+        $data[
+            'event_id' => $data,
+            'user_id' => session('id'),
+        ];
+         $this->voucherServices->getPresence($data);
+
+        return view('vouchers', session('id'));
     }
 }

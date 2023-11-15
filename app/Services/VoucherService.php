@@ -21,4 +21,9 @@ class VoucherService
     {
         return $this->voucherModel->getVouchersWithRelations();
     }
+    public function getPresence($data)
+    {
+        return $this->voucherModel->confirmedPresence($data);
+    }
+
 }
