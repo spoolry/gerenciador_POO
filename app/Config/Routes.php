@@ -26,3 +26,4 @@ $routes->post('createEvent', 'EventController::createEvent');
 $routes->get('event/deleteEvent/(:num)', 'EventController::deleteEvent/$1');
 
 $routes->get('showVoucher', 'VoucherController::showVoucher');
+$routes->get('confirmed/(:num)', 'VoucherController::confirmed/$1'); 
