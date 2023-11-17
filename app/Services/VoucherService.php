@@ -17,13 +17,14 @@ class VoucherService
         $this->voucherModel = Factories::models(VoucherModel::class);
     }
 
-    public function getVoucher()
+    public function getVoucher($data)
     {
-        return $this->voucherModel->getVouchersWithRelations();
+        return $this->voucherModel->getVouchersWithRelations($data);
     }
     public function getPresence($data)
     {
         return $this->voucherModel->confirmedPresence($data);
     }
+    
 
 }

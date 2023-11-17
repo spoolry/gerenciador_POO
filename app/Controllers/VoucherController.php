@@ -10,31 +10,31 @@ use CodeIgniter\Config\Factories;
 
 class VoucherController extends BaseController
 {
-    private $voucherServices;
-
+    private $voucherService;
+    private $voucherModel;
 
 
     public function __construct()
     {
-        $this->voucherServices = Factories::class(VoucherService::class);
+        $this->voucherService = Factories::class(VoucherService::class);
+        $this->voucherModel = Factories::models(VoucherModel::class);
     }
 
-    public function showVoucher()
+    public function showVoucher($data)
     {
-        $data['vouchers'] = $this->voucherServices->getVoucher();
+        $data['vouchers'] = $this->voucherService->getVoucher();
         return view('vouchers', $data);
     }
 
     public function confirmed($data)
     {
-        $this->request->getPost($data);
-
-        $data[
-            'event_id' => $data,
+        $data = [
             'user_id' => session('id'),
+            'event_id' => $data,
         ];
-         $this->voucherServices->getPresence($data);
 
-        return view('vouchers', session('id'));
+        $this->voucherService->getPresence($data);
+
+        return view('vouchers', $data);
     }
 }
