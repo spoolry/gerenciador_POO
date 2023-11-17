@@ -21,8 +21,9 @@ class UserService
 
     public function authenticate($email, $password)
     {
+        //verifica se o email digitado é igual ao email cadastrado
         $user = $this->userModel->getUser($email);
-        
+        //verifica se a senha e o email são os mesmos cadastrados
         if ($user && password_verify($password, $user->password)) {
 
             $variavalDeSessao = [
@@ -42,17 +43,17 @@ class UserService
             return false;
         }
     }
-
+    //metodo para criar o usuario
     public function createUser($userArray)
     {
-
+        //usando a entidade para selecionar os campos para criar
         $user = new User();
 
         $user->name = $userArray['name'];
         $user->email = $userArray['email'];
         $user->password = $userArray['password'];
 
-
+        //verifica e envia os dados para o model para a criação
         if ($this->userModel->save($user)) {
             session()->setFlashdata('success', lang('App.successCreateLogin', [], session('user_locale')));
             return redirect()->to('/');

@@ -40,7 +40,7 @@ class UserModel extends Model
         'email' => 'required|valid_email|is_unique[users.email]',
         'password' => 'required|min_length[6]',
     ];
-
+    //pega os dados no banco no caso o email
     public function getUser($email)
     {
         return $this->where('email', $email)->first();

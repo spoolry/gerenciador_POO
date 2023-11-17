@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Entities\Event;
 use CodeIgniter\Model;
-
+//encapsulamento
 class EventModel extends Model
 {
     protected $table            = 'events';
@@ -24,12 +24,13 @@ class EventModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
     protected $beforeInsert   = ['setCreatedAt'];
+    //salva a data e hora da criação
     protected function setCreatedAt(array $data)
     {
         $data['data']['created_at'] = date('Y-m-d H:i:s');
         return $data;
     }
-
+    //salva a data e hora da atualização
     protected $beforeUpdate = ['setUpdatedAt'];
     protected function setUpdatedAt(array $data)
     {
@@ -37,14 +38,14 @@ class EventModel extends Model
         return $data;
     }
 
-    // Validation
+    // Validações do evento
     protected $validationRules = [
         'name' => 'required|min_length[3]|',
         'date_time' => 'required',
         'local' => 'required|min_length[2]',
         'description' => 'min_length[6]',
     ];
-
+    //salva dados do evento cadastrado no banco
     public function SaveEvent(Event $event)
     {
         try {

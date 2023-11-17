@@ -27,14 +27,14 @@ class UserController extends BaseController
     {
         echo view('registerUser');
     }
-
+    //autenticação dos dados que vem do post
     public function authenticate()
     {
 
-        $name = $this->request->getPost('name');
+        //$name = $this->request->getPost('name');
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
-
+        //verifica no service se o email e senha estão corretos
         return ($this->userService->authenticate($email, $password)) ? redirect()->to('/dashboard') : redirect()->back();
     }
 

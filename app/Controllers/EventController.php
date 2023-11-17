@@ -9,7 +9,7 @@ use CodeIgniter\Config\Factories;
 
 class EventController extends BaseController
 {
-
+    
     private $eventService;
     private $eventModel;
 
@@ -75,8 +75,7 @@ class EventController extends BaseController
 
     public function showEvent()
     {
-        $eventModel = new EventModel();
-        $data['events'] = $eventModel->findAll();
+        $data['events'] = $this->eventModel->findAll();
         return view('/registeredEvent', $data);
     }
 }
