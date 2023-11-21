@@ -1,23 +1,58 @@
-<?php if(session()->getFlashdata('error')): ?>
+<?php if (session()->getFlashdata('error')) : ?>
     <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
-<?php endif;?>
+<?php endif; ?>
 
-<?php if(session()->getFlashdata('success')): ?>
+<?php if (session()->getFlashdata('success')) : ?>
     <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
-<?php endif;?>
+<?php endif; ?>
 
 
-<form action="authenticate" method="post">
-<div class="form-group">
-        <div class="form-group">
-        <label>Email</label>
-        <input type="text" name="email" class="form-control" required>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>NOME EMPRESA</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="wrapper">
+
+        <div class="login-box">
+            <form action="authenticate" method="post">
+                <h2>Login</h2>
+
+                <div class="input-box">
+                    <!-- <span class="icon">
+                        <ion-icon name="email"></ion-icon>
+                    </span> -->
+                    <input type="email" name="email" id="email" required />
+                    <label>Email</label>
+                </div>
+
+                <div class="input-box">
+                    <!-- <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span> -->
+                    <input type="password" name="password" id="password" required />
+                    <label>Senha</label>
+                </div>
+
+                <button type="submit">Login</button>
+
+                <div class="register-link">
+                    <p>Não tem uma conta? <a href="/registerUser">Cadastre-se</a></p>
+                </div>
+            </form>
+        </div>
+
     </div>
-    <div class="form-group">
-        <label>Senha</label>
-        <input type="password" name="password" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+    <!-- partial -->
+    <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js'></script>
+    <script src='https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js'></script>
+</body>
 
-<a href = "/registerUser">Cadastro</a>
+</html>

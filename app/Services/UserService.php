@@ -48,7 +48,6 @@ class UserService
     {
         //usando a entidade para selecionar os campos para criar
         $user = new User();
-
         $user->name = $userArray['name'];
         $user->email = $userArray['email'];
         $user->password = $userArray['password'];
