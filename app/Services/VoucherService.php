@@ -17,9 +17,19 @@ class VoucherService
         $this->voucherModel = Factories::models(VoucherModel::class);
     }
 
-    public function getVoucher($data)
+    public function tryUpdate(Voucher $voucher)
     {
-        return $this->voucherModel->getVouchersWithRelations($data);
+        try {
+            if($voucher->hasChanged()){
+                $this->voucherModel->getVouchersWithRelations($voucher);
+            }
+        } catch (\Exception $e) {
+            die("Erro ao realizar o processo.");
+        }
+    }
+    public function getVoucher($id)
+    {
+        return $this->voucherModel->getId($id);
     }
     public function getPresence($data)
     {
