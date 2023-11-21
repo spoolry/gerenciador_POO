@@ -20,10 +20,25 @@ class VoucherController extends BaseController
         $this->voucherModel = Factories::models(VoucherModel::class);
     }
 
-    public function showVoucher($data)
+    public function showVoucher()
     {
-        $data['vouchers'] = $this->voucherService->getVoucher();
-        return view('vouchers', $data);
+        $id = session('id');
+
+        $dataView = ['vouchers' => $this->voucherService->getVoucher($id)];
+        
+        if ($data = $this->request->getPost()) {
+
+            $voucher = new VoucherModel();
+
+            $voucher = $this->voucherService->getVoucher($data['id']);
+
+            $voucher->fill($data);
+            
+            $this->voucherService->tryUpdate($voucher);
+            return redirect()->to('/dashboard');
+        } else {
+            return view('vouchers', $dataView);
+        }
     }
 
     public function confirmed($data)
