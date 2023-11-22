@@ -34,7 +34,7 @@ if (!function_exists('retirarCaracteresEspeciais')) {
 if (!function_exists('timestamp2br')) {
     function timestamp2br($timestamp)
     {
-      
+
         return date('d/m/Y H:i', strtotime($timestamp));
     }
 }

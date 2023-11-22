@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Entities\Voucher;
 use CodeIgniter\Model;
+use PhpParser\Node\Expr\New_;
 
 class VoucherModel extends Model
 {
@@ -11,6 +12,7 @@ class VoucherModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = Voucher::class;
+    protected $DBGroup          = 'default';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = ['event_id', 'user_id'];
@@ -27,8 +29,17 @@ class VoucherModel extends Model
         return $data;
     }
 
+    public function getId($id)
+    {
+        return $this->find($id);
+    }
+
+    public function confirmedPresence($data)
+    {
+        return $this->insert($data);
+    }
+
     // Validation
-    protected $validationRules      = [];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
@@ -43,27 +54,4 @@ class VoucherModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getVouchersWithRelations(Voucher $voucher)
-    {
-        try{
-        $this->select('vouchers.*, events.name, users.name');
-        $this->join('events', 'vouchers.event_id = events.id');
-        $this->join('users', 'vouchers.user_id = users.id');
-        $this->where('vouchers.user_id', session('id_user'));
-        $this->save($voucher);
-    } catch (\Exception $e) {
-        die("Erro ao salvar os vouchers.");
-    }
-    }
-    
-    public function getId($id)
-    {
-        return $this->find($id);
-    }
-
-    public function confirmedPresence($data)
-    {
-        return $this->insert($data);
-    }
 }
