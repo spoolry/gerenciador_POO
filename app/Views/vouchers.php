@@ -19,6 +19,7 @@
             echo "<br>";
             echo "Evento: " . $voucher->event_name;
             echo "<br>";
+            echo "<br>";
         }
     endforeach;
 
