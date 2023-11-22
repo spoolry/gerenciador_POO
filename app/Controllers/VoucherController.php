@@ -25,11 +25,10 @@ class VoucherController extends BaseController
         $voucher = New VoucherModel();
 
         $data['vouchers'] = $voucher
-            ->select('vouchers.*', 'events.name AS event_name', 'users.name AS user_name')
-            ->join('events', 'events.id = vouchers.event_id', 'left')
-            ->join('users', 'users.id = vouchers.user_id', 'left')
-            ->where('vouchers.user_id is not null')
-            ->findAll();
+        ->select('events.name AS event_name, vouchers.*')
+        ->join('events', 'events.id = vouchers.event_id', 'left')
+        ->where('vouchers.user_id', session('id'))
+        ->findAll();
 
         return view('vouchers', $data);
     }
