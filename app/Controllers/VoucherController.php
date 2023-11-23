@@ -22,23 +22,15 @@ class VoucherController extends BaseController
 
     public function showVoucher()
     {
-        $id = session('id');
+        $voucher = New VoucherModel();
 
-        $dataView = ['vouchers' => $this->voucherService->getVoucher($id)];
-        
-        if ($data = $this->request->getPost()) {
+        $data['vouchers'] = $voucher
+        ->select('events.name AS event_name, vouchers.*')
+        ->join('events', 'events.id = vouchers.event_id', 'left')
+        ->where('vouchers.user_id', session('id'))
+        ->findAll();
 
-            $voucher = new VoucherModel();
-
-            $voucher = $this->voucherService->getVoucher($data['id']);
-
-            $voucher->fill($data);
-            
-            $this->voucherService->tryUpdate($voucher);
-            return redirect()->to('/dashboard');
-        } else {
-            return view('vouchers', $dataView);
-        }
+        return view('vouchers', $data);
     }
 
     public function confirmed($data)
