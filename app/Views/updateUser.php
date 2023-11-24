@@ -14,14 +14,14 @@
         <form method="POST" action="/updateUser">
             <input type="hidden" name="id" id="id" value="<?php echo $user->id ?>" />
             <label for="text">Nome:</label>
-            <input type="text" name="name" id="name" value="<?php echo $user->name ?>" required />
+            <input type="text" name="name" textarea style="color: white; background-color: transparent;" id="name" value="<?php echo $user->name ?>" required />
             <label for="text">Email:</label>
-            <input type="email" name="email" id="email" value="<?php echo $user->email ?>" readonly />
+            <input type="email" name="email" textarea style="color: white; background-color: transparent;" id="email" value="<?php echo $user->email ?>" readonly />
             <label for="text">Senha:</label>
-            <input type="password" name="password" id="password" />
-            <button type="submit">Atualizar</button>
+            <input type="password" name="password" textarea style="color: white; background-color: transparent;" id="password" />
+            <input class="btn btn-primary" type="submit" value="Atualizar"> 
+            <a class="btn btn-primary" href="/deleteUser" role="button">Deletar</a>
         </form>
 
-        <a href="/deleteUser">Deletar</a>
     </div>
 </body>

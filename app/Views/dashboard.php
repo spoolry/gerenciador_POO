@@ -1,3 +1,12 @@
+<?php if (session()->getFlashdata('error')) : ?>
+    <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('success')) : ?>
+    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+<?php endif; ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,23 +20,15 @@
 
 </head>
 
-<?php if (session()->getFlashdata('error')) : ?>
-    <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
-<?php endif; ?>
-
-<?php if (session()->getFlashdata('success')) : ?>
-    <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
-<?php endif; ?>
-
 <body>
     <div class="dashboard">
         <div class="menu">
             <?php
             echo "Email do usuário: " . session('email');
             echo "<br>";
-            echo "Data e hora login: " . session('data_login');
+            echo "Data e hora login: " . timestamp2br(session('data_login'));
             echo "<br>";
-            echo "Data e hora cadastro: " . session('data_cad');
+            echo "Data e hora cadastro: " . timestamp2br(session('data_cad'));
             echo "<hr>";
             echo "<br>";
             echo lang('App.welcome', [], session('user_locale'));

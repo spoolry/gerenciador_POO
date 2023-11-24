@@ -5,7 +5,7 @@
     <?php if (session()->getFlashdata('success')) : ?>
         <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
     <?php endif; ?>
-    <title>Eventos Cadastrados</title>
+    <title>V&G Events</title>
     <meta charset="UTF-8">
     <link rel="icon" href="/img/icone.png" />
     <link rel="stylesheet" href="/css/style.css">
@@ -32,16 +32,18 @@
                 echo "<br>";
                 echo "Descrição: " . $event->description;
                 echo "<br>";
+                echo "<br>";
                 //echo "<form action='".base_url('confirmed')."' method='POST'>";
                 //echo "<input type='hidden' name='id_voucher' value='".$event->id."'/>";
                 //echo '<button type="submit">Confirmar Presença</button>';
                 //echo '</form>';
                 echo "<form action='" . base_url('confirmed') . "' method='POST'>";
-                echo "<a href='" . base_url('confirmed') . "/" . $event->id . "'>Confirmar Presença</a>";
+                echo '<a class="btn btn-primary" href="' . base_url('confirmed') . "/" . $event->id . '" role="button">Confirmar Presença</a>';
+                echo "<br>";
                 echo "<br>";
                 if ($event->creator === session()->get('id')) {
-                    echo '<a href="' . base_url('event/updateEvent/' . $event->id) . '">Atualizar | </a>';
-                    echo '<a href="' . base_url('event/deleteEvent/' . $event->id) . '">Deletar</a>';
+                    echo '<a class="btn btn-primary" href="' . base_url('event/updateEvent/' . $event->id) . '" role="button">Atualizar</a>';
+                    echo '<a class="btn btn-primary" href="' . base_url('event/deleteEvent/' . $event->id) . '" role="button">Deletar</a>';
                 }
 
                 echo "<hr>";
