@@ -43,6 +43,8 @@
             <a class="btn btn-primary" href="/registeredEvent" role="button">Eventos Cadastrados</a>
             <br><br>
             <a class="btn btn-primary" href="/showVoucher" role="button">Vouchers</a>
+            <br><br>
+            <a class="btn btn-primary" href="/logout" role="button">Logout</a>
             <br>
         </div>
     </div>
